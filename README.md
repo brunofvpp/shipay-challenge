@@ -58,3 +58,28 @@ O ideal seria rodar os testes em um ambiente o mais proximo possivel de produç�
 ## Questão 5
 
 [Implementacao aqui](./question_5/README.md)
+
+
+## Questão 6
+
+ - Falta testes.
+
+ - O logger está com tamanho muito pequeno é necessario aumenta-lo pra diminuir a rotação de arquivos.
+
+ - O config parser está apontando para o caminho errado, além de corrigir seria interessante implementar um fallback pra esse caso.
+
+ - Muitos valores estão hardcoded, inclusive dados sensiveis sugiro criar env vars.
+
+ - add_job irá falhar pois espera receber um callable.
+
+ - A query sql tem o potencial de derrubar a aplicação por falta de memória se a tabela consultada for muito grande, sugiro deixar explicito na consulta somente os campos que serão utilizados e consumir os dados em chunks.
+
+ - Caso dê erro de qualquer natureza o arquivo xlsx que está sendo criado, não será devidamente fechado, melhor caminho seria adicionar um try/finally.
+
+ - Evitaria expor dados sensiveis como senha, além de deixar os usuarios vulneraveis a criação desse arquivo pode violar as normas da LGPD.
+
+ - Como os relatórios gerados não estão sendo excluídos eventualmente a aplicação vai sofrer com falta de armazenagem, se possível criar usando `tempfile` ou envia-lós para storage externo.
+
+ - Algumas variaveis estão com nomes improprios ou pouco descritivos.
+
+ - Faz mais sentido utilizar o logger do que usar print.
