@@ -83,3 +83,8 @@ O ideal seria rodar os testes em um ambiente o mais proximo possivel de produç�
  - Algumas variaveis estão com nomes improprios ou pouco descritivos.
 
  - Faz mais sentido utilizar o logger do que usar print.
+
+
+## Questão 7
+
+Eu utilizaria o padrão adapter junto com strategy e em alguns casos com factory. Assim cada serviço terá o seu adapter deixando o código fica desacoplado enquanto a lógica de cada serviço externo permanece isolada. Para facilitar o switch de adapter em tempo de execução sem mexer na lógica de negócio podemos usar Strategy e Factory para centralizar a criação sem ter que decidir manualmente qual Adapter instanciar em cada parte do código.
