@@ -12,3 +12,14 @@ Segue diagramas C4 até o 3 nível:
 <a href="question_1/C4_Container.png" target="_blank">C4 Container</a>
 
 <a href="question_1/C4_Component.png" target="_blank">C4 Component</a>
+
+
+## Questão 2
+
+A solução é desacoplar a geração do relatório do fluxo de lançamento, fazendo com que falhas no novo processo não impacte o fluxo principal. Eu implementaria uma arquitetura baseada em eventos assíncronos com armazenamento paralelo. O endpoint de lançamento continua responsável pelo negócio principal, após registrar com sucesso o dado, ele publica um evento contendo os dados necessários para o relatório mas também utiliza transactional outbox para controle dos eventos emitidos. Essa publicação não deve ser bloqueante. Utilizaria um broker como Kafka, RabbitMQ ou SNS/SQS para receber eventos junto com a criação de dead letter queues para garantir que nenhum dado de relatório seja perdido em falhas críticas, as mensagens que falharem no worker podem ser enviadas para uma fila de erro para reprocessamento posterior. Criaria o serviço de ingestão do relatório que tem um worker que consome os eventos e grava em uma base paralela, desenhada para leitura agregada. Essa base até pode ter schemas desnormalizados por relatório para facilitar as consultas. O processamento inclui validação, enriquecimento e deduplicação idempotente para evitar contagens duplicadas como optimistic lock.
+
+Segue diagramas C4 até o 2 nível:
+
+<a href="question_2/C4_Context.png" target="_blank">C4 Context</a>
+
+<a href="question_2/C4_Container.png" target="_blank">C4 Container</a>
