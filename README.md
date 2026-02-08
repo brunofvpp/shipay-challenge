@@ -50,7 +50,7 @@ O ideal seria executar os testes em um ambiente o mais próximo possível do de 
 
 ## Questão 5
 
-[Implementação aqui](./question_5/README.md)
+[Implementação aqui](./question_5)
 
 
 ## Questão 6
