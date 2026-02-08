@@ -34,3 +34,22 @@ Eu usaria o Locust para realizar os seguintes testes:
   - Teste de estabilidade utilizando carga fixa de pelo menos 1000 rp/s por um periodo maior para determinar se a aplicação se mantem estavel sem degradar a performace.
 
 O ideal seria rodar os testes em um ambiente o mais proximo possivel de produção. Com isso é possivel gerar os relatórios com: gráfico de P99, taxa de erro, throughput para cada um dos testes
+
+
+## Questão 4
+
+- Falta testes.
+
+- Inconsistencia na tipagem apesar de não estar funcionando como strict, além de alguns contratos não estarem vinculados a classe abstrata criando alto acoplamento.
+
+- Configuração fragmentada usando Base diferente cada parte pode usar metadatas diferentes.
+
+- `Controller` tem acoplamento implícito com estrutura de request e depende de path param inexistente.
+
+- `SqlRepository` e `RegistrationRepository` sofrem de fragmentação de sessao, apesar de funcional vão falhar silenciosamente, causando problema de DI e false UOW. Além do uso incorreto do selectinload.
+
+- `Orchestrator` está fazendo bypass na camada de domínio usando o repository.
+
+- `Tools` se tornou um God object com muitas responsabilidades além das queries feitas que estão propensas a sofrer SQL injection.
+
+- `ExceptionHandlerMiddleware` está expondo o stacktrace, revelando o funcionamento interno da aplicação facilitando a engenharia reversa.
