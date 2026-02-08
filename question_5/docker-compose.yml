@@ -1,0 +1,36 @@
+services:
+  shipay_challenge_database:
+    image: postgres:17.5-alpine
+    container_name: shipay_challenge_database
+    ports:
+      - "5432:5432"
+    env_file: docker-compose.env
+    environment:
+      POSTGRES_USER: shipay
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: shipay
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shipay -d shipay"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  shipay_challenge_app:
+    build: .
+    container_name: shipay_challenge_app
+    hostname: shipay-challenge-app
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      shipay_challenge_database:
+        condition: service_healthy
+    env_file: docker-compose.env
+    command: "python -m uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health/?format=json"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

@@ -53,3 +53,8 @@ O ideal seria rodar os testes em um ambiente o mais proximo possivel de produç�
 - `Tools` se tornou um God object com muitas responsabilidades além das queries feitas que estão propensas a sofrer SQL injection.
 
 - `ExceptionHandlerMiddleware` está expondo o stacktrace, revelando o funcionamento interno da aplicação facilitando a engenharia reversa.
+
+
+## Questão 5
+
+[Implementacao aqui](./question_5/README.md)
