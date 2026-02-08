@@ -23,3 +23,14 @@ Segue diagramas C4 até o 2 nível:
 <a href="question_2/C4_Context.png" target="_blank">C4 Context</a>
 
 <a href="question_2/C4_Container.png" target="_blank">C4 Container</a>
+
+
+## Questão 3
+
+Eu usaria o Locust para realizar os seguintes testes:
+
+  - Teste de carga com spawn rate de 50 users/s até atingir 1.000 rp/s para determinar se o requisito de performace está sendo atendido.
+  - Teste de stress aumentando a carga gradualmente até encontrar o ponto de ruptura e determinar o limite de rp/s da aplicação.
+  - Teste de estabilidade utilizando carga fixa de pelo menos 1000 rp/s por um periodo maior para determinar se a aplicação se mantem estavel sem degradar a performace.
+
+O ideal seria rodar os testes em um ambiente o mais proximo possivel de produção. Com isso é possivel gerar os relatórios com: gráfico de P99, taxa de erro, throughput para cada um dos testes
